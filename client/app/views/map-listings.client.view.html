@@ -8,7 +8,7 @@
     https://angular-ui.github.io/angular-google-maps/#!/api/markers
     https://angular-ui.github.io/angular-google-maps/#!/api/windows
   -->
-<div class="row" ng-controller="ListingsController">
+<div class="row" ng-controller="ListingsController" ng-init="find()">
   <div class="col-md-offset-1 col-md-10 formWrapper">
     <div class="page-header">
       <h3>Map Listing</h3>
@@ -23,9 +23,11 @@
 
           https://github.com/paulyoder/angular-bootstrap-show-errors
        -->
-      <div id="map_canvas">
-         <ui-gmap-google-map center="map.center" zoom="map.zoom" options="options"></ui-gmap-google-map>
-      </div>
+       <ui-gmap-google-map center="map.center" zoom="map.zoom" draggable="true" options="options" bounds="map.bounds">
+          <ui-gmap-markers models="randomMarkers" coords="'self'" icon="'icon'">
+          </ui-gmap-markers>
+        </ui-gmap-google-map>
+
     </div>
   </div>
 </div>
