@@ -116,13 +116,12 @@ angular.module('listings').controller('ListingsController', ['$scope', '$locatio
       bounds: {}
     };
     $scope.options = {
-      scrollwheel: false
+      scrollwheel: true
     };
-    var createRandomMarker = function(i, bounds, idKey) {
+    var createMarker = function(i, idKey) {
       if (idKey == null) {
         idKey = "id";
       }
-
       var latitude = $scope.listings[i].coordinates.latitude;
       var longitude = $scope.listings[i].coordinates.longitude;
       var ret = {
@@ -133,21 +132,21 @@ angular.module('listings').controller('ListingsController', ['$scope', '$locatio
       ret[idKey] = i;
       return ret;
     };
-    $scope.randomMarkers = [];
-    // Get the bounds from the map once it's loaded
-    $scope.$watch(function() {
-      return $scope.map.bounds;
-    }, function(nv, ov) {
-      // Only need to regenerate once
-      console.log($scope.listings.length);
-      if (!ov.southwest && nv.southwest) {
-        var markers = [];
-        for (var i = 0; i < $scope.listings.length; i++) {
-          if($scope.listings[i].address != undefined)
-          markers.push(createRandomMarker(i, $scope.map.bounds))
-        }
-        $scope.randomMarkers = markers;
-      }
-    }, true);
+    $scope.Markers = [];
+    $scope.mappy= function(){
+      $scope.$watch(function() {
+        return $scope.map.bounds;
+      }, function() {
+          var markers = [];
+          if($scope.listings){
+            for (var i = 0; i < $scope.listings.length; i++) {
+              if($scope.listings[i].address != undefined){
+                markers.push(createMarker(i));
+              }
+            }
+            $scope.Markers = markers;
+          }
+      }, true);
+    }
   }
 ]);
