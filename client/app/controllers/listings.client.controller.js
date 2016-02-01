@@ -97,7 +97,7 @@ angular.module('listings').controller('ListingsController', ['$scope', '$locatio
                 $state.go('listings.list', { successMessage: 'Listing succesfully deleted!' });
               }, function(error) {
                 //otherwise display the error
-                $scope.error = 'Unable to save listing!\n' + error;
+                $scope.error = 'Unable to delete listing!\n' + error;
               });
     };
 
