@@ -124,10 +124,14 @@ angular.module('listings').controller('ListingsController', ['$scope', '$locatio
       }
       var latitude = $scope.listings[i].coordinates.latitude;
       var longitude = $scope.listings[i].coordinates.longitude;
+      var code = $scope.listings[i].code;
+      var address=$scope.listings[i].address;
       var ret = {
         latitude: latitude,
         longitude: longitude,
-        title: $scope.listings[i].name
+        title: $scope.listings[i].name,
+	code: code,
+	address: address
       };
       ret[idKey] = i;
       return ret;
