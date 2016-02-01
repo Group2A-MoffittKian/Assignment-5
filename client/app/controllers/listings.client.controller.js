@@ -126,31 +126,34 @@ angular.module('listings').controller('ListingsController', ['$scope', '$locatio
       var longitude = $scope.listings[i].coordinates.longitude;
       var code = $scope.listings[i].code;
       var address=$scope.listings[i].address;
+      var title=$scope.listings[i].name;
+
       var ret = {
         latitude: latitude,
         longitude: longitude,
-        title: $scope.listings[i].name,
-	code: code,
-	address: address
+        title: title,
+      	code: code,
+      	address: address
       };
       ret[idKey] = i;
       return ret;
     };
+
     $scope.Markers = [];
-    $scope.mappy= function(){
-      $scope.$watch(function() {
-        return $scope.map.bounds;
-      }, function() {
-          var markers = [];
-          if($scope.listings){
-            for (var i = 0; i < $scope.listings.length; i++) {
-              if($scope.listings[i].address != undefined){
-                markers.push(createMarker(i));
-              }
+
+    $scope.$watch(function() {
+      return $scope.map.bounds;
+    }, function() {
+        var markers = [];
+        if($scope.listings){
+          for (var i = 0; i < $scope.listings.length; i++) {
+            if($scope.listings[i].address != undefined){
+              markers.push(createMarker(i));
             }
-            $scope.Markers = markers;
           }
-      }, true);
-    }
+          $scope.Markers = markers;
+        }
+    }, true);
+
   }
 ]);
